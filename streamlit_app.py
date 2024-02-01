@@ -12,13 +12,14 @@ def transcribe_audio(file):
 def main():
     st.title("Audio Transcription App")
 
-    uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav"])
+    uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "m4a"])
 
     if uploaded_file is not None:
         st.audio(uploaded_file, format='audio/mp3', start_time=0)
-        st.write("Transcription:")
-        transcript = transcribe_audio(uploaded_file)
-        st.write(transcript)
+        if st.button("Transcribe"):
+            st.write("Transcription:")
+            transcript = transcribe_audio(uploaded_file)
+            st.write(transcript)
 
 if __name__ == "__main__":
     main()
