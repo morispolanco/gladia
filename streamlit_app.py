@@ -3,7 +3,7 @@ import requests
 
 st.title("Audio Transcription App")
 
-audio_file = st.file_uploader("Upload an audio file (m4a format)", type="audio/m4a")
+audio_file = st.file_uploader("Upload an audio file (m4a or mp3 format)", type=["audio/m4a", "audio/mp3"])
 
 if audio_file is not None:
     headers = {
