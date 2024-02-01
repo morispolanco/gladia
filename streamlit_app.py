@@ -2,7 +2,7 @@ import requests
 
 def transcribe_voice_notes(api_key, audio_url, language_behavior):
     headers = {
-        'x-gladia-key': '16d52384-d97c-4557-809b-865c2ef2460c',
+        'x-gladia-key': 16d52384-d97c-4557-809b-865c2ef2460c,
     }
 
     files = {
