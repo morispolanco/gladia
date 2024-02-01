@@ -1,25 +1,29 @@
-import streamlit as st
 import requests
 
-st.title("Audio Transcription App")
-
-audio_file = st.file_uploader("Upload an audio file (m4a or mp3 format)", type=["m4a", "mp3"])
-
-if audio_file is not None:
+def transcribe_voice_notes(api_key, audio_url, language_behavior):
     headers = {
         'x-gladia-key': '16d52384-d97c-4557-809b-865c2ef2460c',
     }
+
     files = {
-        'audio': audio_file,
+        'audio_url': (None, audio_url),
+        'language_behaviour': (None, language_behavior),
     }
 
     response = requests.post('https://api.gladia.io/audio/text/audio-transcription/', headers=headers, files=files)
-
+    
     if response.status_code == 200:
-        st.success("Transcription complete!")
-        data = response.json()
-        transcript = data['result']['alternatives'][0]['transcript']
-        st.write("Transcript:")
-        st.write(transcript)
+        return response.json()
     else:
-        st.error("An error occurred during transcription.")
+        return f"Error: {response.status_code}"
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    api_key = '<your api key>'
+    audio_url = 'http://files.gladia.io/example/audio-transcription/split_infinity.wav'
+    language_behavior = 'automatic multiple languages'
+
+    transcription_result = transcribe_voice_notes(api_key, audio_url, language_behavior)
+    print(transcription_result)
+
+
