@@ -1,20 +1,24 @@
-import requests
 import streamlit as st
+import assemblyai as aai
 
-st.title('Transcripción de audio')
+# Replace with your API key
+aai.settings.api_key = "0f17d11299bd4b988050d81317fa37e8"
 
-uploaded_file = st.file_uploader("Cargar archivo de audio", type=['mp3', 'wav', 'm4a'])
+def transcribe_audio(file):
+    transcriber = aai.Transcriber()
+    transcript = transcriber.transcribe(file)
+    return transcript.text
 
-if uploaded_file is not None:
-    headers = {
-        'x-gladia-key': '16d52384-d97c-4557-809b-865c2ef2460c',
-    }
+def main():
+    st.title("Audio Transcription App")
 
-    files = {
-        'audio': uploaded_file,
-        'toggle_diarization': (None, 'true'),
-    }
+    uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav"])
 
-    response = requests.post('https://api.gladia.io/audio/text/audio-transcription/', headers=headers, files=files)
+    if uploaded_file is not None:
+        st.audio(uploaded_file, format='audio/mp3', start_time=0)
+        st.write("Transcription:")
+        transcript = transcribe_audio(uploaded_file)
+        st.write(transcript)
 
-    st.write(response.text)
+if __name__ == "__main__":
+    main()
