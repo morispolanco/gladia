@@ -4,9 +4,9 @@ import assemblyai as aai
 # Replace with your API key
 aai.settings.api_key = "0f17d11299bd4b988050d81317fa37e8"
 
-def transcribe_audio(file_url, language="es"):
+def transcribe_audio(file_path, language="es"):
     transcriber = aai.Transcriber()
-    transcript = transcriber.transcribe(file_url, language=language)
+    transcript = transcriber.transcribe(file_path, language=language)
     return transcript.text
 
 def main():
