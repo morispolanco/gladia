@@ -7,7 +7,7 @@ st.title("Transcripción de Voz a Texto")
 audio_file = st.file_uploader("Cargar archivo de audio", type=["mp3", "wav", "m4a"])
 
 if audio_file is not None:
-    st.audio(audio_file, format='audio/wav')
+    st.audio(audio_file, format='audio/wav') 
 
     # Botón para iniciar la transcripción
     if st.button("Transcribir"):
