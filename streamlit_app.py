@@ -4,9 +4,9 @@ import assemblyai as aai
 # Replace with your API key
 aai.settings.api_key = "0f17d11299bd4b988050d81317fa37e8"
 
-def transcribe_audio(file_url):
+def transcribe_audio(file_url, language="es"):
     transcriber = aai.Transcriber()
-    transcript = transcriber.transcribe(file_url)
+    transcript = transcriber.transcribe(file_url, language=language)
     return transcript.text
 
 def main():
@@ -22,7 +22,7 @@ def main():
             with open("temp_audio_file", "wb") as f:
                 f.write(uploaded_file.read())
             # Transcribe the temporary audio file
-            transcript = transcribe_audio("temp_audio_file")
+            transcript = transcribe_audio("temp_audio_file", language="es")
             st.write(transcript)
 
 if __name__ == "__main__":
