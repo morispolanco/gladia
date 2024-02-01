@@ -1,4 +1,4 @@
-import streamlit
+import streamlit as st
 import requests
 
 def transcribe_voice_notes(api_key, audio_url, language_behavior):
